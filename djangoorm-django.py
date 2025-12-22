@@ -14,8 +14,8 @@ def snippet_list(request):
   # ruleid: djangoorm-django
   q = Question.objects.raw(f"SELECT * FROM question WHERE text = '{name}'")
 
-  # ruleid: djangoorm-django
-  q = Question.objects.extra({"val": f"SELECT * FROM question WHERE text = '{name}'"}).all()
+  # ok: djangoorm-django
+  q = Question.objects.extra({"val": "SELECT * FROM question WHERE text = %s"}, [name]).all()
 
   # ok: djangoorm-django
   q = Question.objects.raw(f"SELECT * FROM question WHERE text = '%s'", [name])
